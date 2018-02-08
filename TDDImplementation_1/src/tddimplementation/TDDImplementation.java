@@ -19,7 +19,11 @@ public class TDDImplementation {
         TDDImplementation test = new TDDImplementation();
         
         test.createOrder_returnsUniqueOrderReference();
-        System.out.println("createOrder_returnsUniqueOrderReference PASSED");        
+        System.out.println("createOrder_returnsUniqueOrderReference PASSED"); 
+        
+        test.getOrder_returnsCorrectReferenceAndNumOfBricks();
+        System.out.println("getOrder_returnsCorrectReferenceAndNumOfBricks PASSED"); 
+        
     }
     public void createOrder_returnsUniqueOrderReference(){
         // Setup
@@ -36,6 +40,21 @@ public class TDDImplementation {
         }
         assert equalRefCounter==1; //Assert that there is 1 order with that reference number (unique)
     }
+    
+    public void getOrder_returnsCorrectReferenceAndNumOfBricks(){
+        // Setup
+        Order order = new Order(5);
+        OrderManager.orders.add(order); //add order directly
+        // Act        
+        Order getOrderResult = OrderManager.getOrder(order.referenceNumber); //Submit a getOrder request using a ref we know to be valid
+        // Assert
+        assert getOrderResult!=null;
+        assert getOrderResult.referenceNumber==order.referenceNumber;
+        assert getOrderResult.numberOfBricks==order.numberOfBricks;
+        
+    }
+    
+    
     
    
     

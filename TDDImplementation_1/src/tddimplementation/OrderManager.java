@@ -18,5 +18,16 @@ public class OrderManager {
         return order.referenceNumber;
     }
     
+   
+    public static Order getOrder(int referenceNumber){
+        
+        for(Order order:orders){ //Go through the list that holds all orders
+            if(order.referenceNumber==referenceNumber){ //Look for order with matching reference number
+                return order; 
+            }
+        }
+        return null;
+    }
+    
     
 }
