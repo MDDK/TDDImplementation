@@ -22,7 +22,10 @@ public class TDDImplementation {
         System.out.println("createOrder_returnsUniqueOrderReference PASSED"); 
         
         test.getOrder_returnsCorrectReferenceAndNumOfBricks();
-        System.out.println("getOrder_returnsCorrectReferenceAndNumOfBricks PASSED"); 
+        System.out.println("getOrder_returnsCorrectReferenceAndNumOfBricks PASSED");
+        
+        test.getOrder_returnsNullIfReferenceIsInvalid();
+        System.out.println("getOrder_returnsNullIfReferenceIsInvalid PASSED");
         
     }
     public void createOrder_returnsUniqueOrderReference(){
@@ -51,6 +54,18 @@ public class TDDImplementation {
         assert getOrderResult!=null;
         assert getOrderResult.referenceNumber==order.referenceNumber;
         assert getOrderResult.numberOfBricks==order.numberOfBricks;
+        
+    }
+    
+    public void getOrder_returnsNullIfReferenceIsInvalid(){
+        // Setup
+                
+        Integer invalidReference=-1; //Create a reference known to be invalid
+        // Act        
+        Order getOrderResult = OrderManager.getOrder(invalidReference);
+        // Assert
+        assert getOrderResult==null;
+        
         
     }
     
