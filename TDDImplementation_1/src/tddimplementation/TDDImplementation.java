@@ -40,16 +40,10 @@ public class TDDImplementation {
         // Setup
         
         // Act        
-        Integer ref = OrderManager.createOrder(1);
+        Integer referenceNumber = OrderManager.createOrder(1);
         // Assert
-        assert ref!=null; //Assert that order reference is returned
-        int equalRefCounter=0;
-        for(Order orderTemp:OrderManager.orders){
-            if(ref==orderTemp.referenceNumber){
-                equalRefCounter+=1;
-            }            
-        }
-        assert equalRefCounter==1; //Assert that there is 1 order with that reference number (unique)
+        assert referenceNumber!=null; //Assert that order reference is returned
+        ensureReferenceIsUnique(referenceNumber);
     }
     
     public void getOrder_returnsCorrectReferenceAndNumOfBricks(){
@@ -108,7 +102,11 @@ public class TDDImplementation {
         Integer referenceNumber=OrderManager.updateOrder(order.referenceNumber, 700);
         assert referenceNumber!=null;
         assert referenceNumber==order.referenceNumber;
-       
+        ensureReferenceIsUnique(referenceNumber);
+        
+        
+    }
+    public void ensureReferenceIsUnique(Integer referenceNumber){
         int equalRefCounter=0;
         for(Order orderTemp:OrderManager.orders){
             if(referenceNumber==orderTemp.referenceNumber){
