@@ -29,5 +29,8 @@ public class OrderManager {
         return null;
     }
     
+    public static LinkedList<Order> getOrders(){
+        return orders;
+    }
     
 }

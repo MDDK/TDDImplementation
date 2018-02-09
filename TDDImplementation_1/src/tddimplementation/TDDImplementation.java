@@ -5,6 +5,8 @@
  */
 package tddimplementation;
 
+import java.util.LinkedList;
+
 /**
  *
  * @author Novus_Admin
@@ -27,6 +29,8 @@ public class TDDImplementation {
         test.getOrder_returnsNullIfReferenceIsInvalid();
         System.out.println("getOrder_returnsNullIfReferenceIsInvalid PASSED");
         
+        test.getOrders_returnsAllDetailsIncludingRefAndBricks();
+        System.out.println("getOrders_returnsAllDetailsIncludingRefAndBricks PASSED");
     }
     public void createOrder_returnsUniqueOrderReference(){
         // Setup
@@ -65,6 +69,31 @@ public class TDDImplementation {
         Order getOrderResult = OrderManager.getOrder(invalidReference);
         // Assert
         assert getOrderResult==null;
+        
+        
+    }
+    
+    public void getOrders_returnsAllDetailsIncludingRefAndBricks(){
+        // Setup
+        Order order = new Order(100);
+        OrderManager.orders.add(order); //add order directly
+
+        Order order2 = new Order(200);
+        OrderManager.orders.add(order2); //add order directly        
+        
+        // Act        
+        LinkedList<Order> orders = OrderManager.getOrders();        
+        
+        // Assert
+        
+        for(Order retrievedOrder:orders){
+            assert retrievedOrder.numberOfBricks!=null; //Assert that there is a number of bricks
+            assert retrievedOrder.referenceNumber!=null; //Assert that there is a reference number
+        }
+        for(int i=0; i<OrderManager.orders.size(); i++){
+            assert orders.get(i).referenceNumber==OrderManager.orders.get(i).referenceNumber; //Make sure we got details of every order by asserting that there are no orders which have a reference number which we dont have a match for
+        }
+        
         
         
     }

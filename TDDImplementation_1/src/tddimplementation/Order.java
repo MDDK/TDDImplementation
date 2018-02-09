@@ -11,7 +11,7 @@ package tddimplementation;
  */
 public class Order {
     static int totalOrders;
-    int numberOfBricks;
+    Integer numberOfBricks;
     Integer referenceNumber;
     
     public Order(int numberOfBricks){
