@@ -33,4 +33,8 @@ public class OrderManager {
         return orders;
     }
     
+    public static Integer updateOrder(int referenceNumber, int numberOfBricks){
+        return referenceNumber;
+    }
+    
 }

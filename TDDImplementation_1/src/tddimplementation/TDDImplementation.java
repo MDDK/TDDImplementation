@@ -31,6 +31,10 @@ public class TDDImplementation {
         
         test.getOrders_returnsAllDetailsIncludingRefAndBricks();
         System.out.println("getOrders_returnsAllDetailsIncludingRefAndBricks PASSED");
+        
+        test.updateOrder_returnsUniqueReference();
+        System.out.println("updateOrder_returnsUniqueReference PASSED");
+        
     }
     public void createOrder_returnsUniqueOrderReference(){
         // Setup
@@ -90,12 +94,28 @@ public class TDDImplementation {
             assert retrievedOrder.numberOfBricks!=null; //Assert that there is a number of bricks
             assert retrievedOrder.referenceNumber!=null; //Assert that there is a reference number
         }
+        
         for(int i=0; i<OrderManager.orders.size(); i++){
             assert orders.get(i).referenceNumber==OrderManager.orders.get(i).referenceNumber; //Make sure we got details of every order by asserting that there are no orders which have a reference number which we dont have a match for
+        }       
+        
+        
+    }
+    public void updateOrder_returnsUniqueReference(){
+        Order order = new Order(300);
+        OrderManager.orders.add(order); //add order directly
+        
+        Integer referenceNumber=OrderManager.updateOrder(order.referenceNumber, 700);
+        assert referenceNumber!=null;
+        assert referenceNumber==order.referenceNumber;
+       
+        int equalRefCounter=0;
+        for(Order orderTemp:OrderManager.orders){
+            if(referenceNumber==orderTemp.referenceNumber){
+                equalRefCounter+=1;
+            }            
         }
-        
-        
-        
+        assert equalRefCounter==1; //Assert that there is 1 order with that reference number (unique)
     }
     
     
